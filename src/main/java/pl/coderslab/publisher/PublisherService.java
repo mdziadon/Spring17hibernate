@@ -2,8 +2,6 @@ package pl.coderslab.publisher;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.coderslab.publisher.Publisher;
-import pl.coderslab.publisher.PublisherDao;
 
 @Service
 @Transactional

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.coderslab.publisher.Publisher;
+import pl.coderslab.publisher.PublisherService;
 
 @Controller
 @RequestMapping("/books")
@@ -13,9 +15,12 @@ public class BookController {
 
     private BookService bookService;
 
+    private PublisherService publisherService;
+
     @Autowired
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, PublisherService publisherService) {
         this.bookService = bookService;
+        this.publisherService = publisherService;
     }
 
     @GetMapping("/add")
@@ -24,6 +29,12 @@ public class BookController {
         Book book = new Book();
         book.setTitle("Thinking in Java");
         book.setAuthor("Bruce Eckel");
+
+        Publisher publisher = new Publisher();
+        publisher.setName("Wydawca testowy");
+        publisherService.savePublisher(publisher);
+
+        book.setPublisher(publisher);
         bookService.saveBook(book);
         return "Dodano ksiazke o id = " + book.getId();
     }
