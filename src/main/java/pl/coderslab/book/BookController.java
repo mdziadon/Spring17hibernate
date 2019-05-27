@@ -70,4 +70,11 @@ public class BookController {
         return "Usunieto ksiazke o id = " + id;
     }
 
+    @GetMapping("/rating/{rating}")
+    @ResponseBody
+    public String findAllByRating(@PathVariable int rating) {
+        List<Book> books = bookService.findAllByRating(rating);
+        return books.toString();
+    }
+
 }

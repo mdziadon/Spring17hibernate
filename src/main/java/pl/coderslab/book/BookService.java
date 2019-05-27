@@ -3,6 +3,8 @@ package pl.coderslab.book;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class BookService {
@@ -27,5 +29,13 @@ public class BookService {
 
     public void deleteBook(Long id) {
         bookDao.deleteBook(id);
+    }
+
+    public List<Book> findAll() {
+        return bookDao.findAll();
+    }
+
+    public List<Book> findAllByRating(int rating) {
+        return bookDao.findAllByRating(rating);
     }
 }
