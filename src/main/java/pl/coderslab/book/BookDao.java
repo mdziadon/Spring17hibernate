@@ -38,7 +38,7 @@ public class BookDao {
     }
 
     public List<Book> findAllByRating(int rating) {
-        Query query = entityManager.createQuery("select b from Book b where b.rating >= :rating");
+        Query query = entityManager.createQuery("select b from Book b join fetch b.authors where b.rating >= :rating");
         query.setParameter("rating", rating);
         return query.getResultList();
     }

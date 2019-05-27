@@ -77,4 +77,11 @@ public class BookController {
         return books.toString();
     }
 
+    @GetMapping("/{id}")
+    @ResponseBody
+    public String findById(@PathVariable Long id) {
+        Book book = bookService.findBookWithAuthors(id);
+        return book.toString();
+    }
+
 }

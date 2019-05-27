@@ -81,6 +81,8 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", rating=" + rating +
                 ", description='" + description + '\'' +
+                ", publisher=" + publisher +
+                ", authors=" + authors +
                 '}';
     }
 }
