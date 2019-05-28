@@ -34,10 +34,16 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    @ResponseBody
     public String addBook(@ModelAttribute Book book) {
         bookService.saveBook(book);
-        return "Zapisano ksiazke id = " + book.getId();
+        return "redirect:list";
+    }
+
+    @GetMapping("/list")
+    public String bookList(Model model) {
+        List<Book> books = bookService.findAll();
+        model.addAttribute("books", books);
+        return "bookList";
     }
 
     @GetMapping("/update/{id}")
