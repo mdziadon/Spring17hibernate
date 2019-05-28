@@ -3,6 +3,8 @@ package pl.coderslab.author;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class AuthorService {
@@ -27,5 +29,9 @@ public class AuthorService {
 
     public void deleteAuthor(Long id) {
         authorDao.deleteAuthor(id);
+    }
+
+    public List<Author> findAll() {
+        return authorDao.findAll();
     }
 }

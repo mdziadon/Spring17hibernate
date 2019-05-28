@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.author.Author;
 import pl.coderslab.author.AuthorService;
 import pl.coderslab.publisher.Publisher;
 import pl.coderslab.publisher.PublisherService;
@@ -48,7 +49,7 @@ public class BookController {
 
     @GetMapping("/update/{id}")
     public String updateBook(@PathVariable Long id, Model model) {
-        Book book = bookService.findBook(id);
+        Book book = bookService.findBookWithAuthors(id);
         model.addAttribute("book", book);
         return "book";
     }
@@ -85,4 +86,8 @@ public class BookController {
         return publisherService.findAll();
     }
 
+    @ModelAttribute("authors")
+    public List<Author> getAuthors() {
+        return authorService.findAll();
+    }
 }

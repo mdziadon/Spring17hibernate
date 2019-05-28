@@ -12,6 +12,9 @@ public class Author {
     private String firstName;
     private String lastName;
 
+    @Transient
+    private String fullName;
+
     public Long getId() {
         return id;
     }
@@ -34,6 +37,10 @@ public class Author {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 
     @Override

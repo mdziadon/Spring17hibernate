@@ -26,6 +26,11 @@
 
     <br><br>
 
+    <label for="authorId">Authors:</label>
+    <form:select path="authors" items="${authors}" itemLabel="fullName" itemValue="id" id="authorId"/>
+
+    <br><br>
+
     <input type="submit" value="Send">
 </form:form>
 </body>
