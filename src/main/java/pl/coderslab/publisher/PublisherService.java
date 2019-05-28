@@ -3,6 +3,8 @@ package pl.coderslab.publisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class PublisherService {
@@ -27,5 +29,9 @@ public class PublisherService {
 
     public void deletePublisher(Long id) {
         publisherDao.deletePublisher(id);
+    }
+
+    public List<Publisher> findAll() {
+        return publisherDao.findAll();
     }
 }
