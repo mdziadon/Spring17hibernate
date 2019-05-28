@@ -13,6 +13,10 @@
 </head>
 <body>
 
+    <a href="/books/add">Add book</a>
+
+    <br><br>
+
     <table border="1">
         <tr>
             <th>Title</th>
