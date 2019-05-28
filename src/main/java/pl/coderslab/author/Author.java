@@ -1,6 +1,9 @@
 package pl.coderslab.author;
 
+import pl.coderslab.book.Book;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "authors")

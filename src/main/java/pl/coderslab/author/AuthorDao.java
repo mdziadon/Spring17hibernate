@@ -38,4 +38,10 @@ public class AuthorDao {
         Query query = entityManager.createQuery("select a from Author a");
         return query.getResultList();
     }
+
+    public void deleteBookConnection(Long authorId) {
+        Query query = entityManager.createNativeQuery("delete from book_authors where author_id = :authorId");
+        query.setParameter("authorId", authorId);
+        query.executeUpdate();
+    }
 }
