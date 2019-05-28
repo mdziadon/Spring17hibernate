@@ -47,19 +47,23 @@ public class BookController {
     }
 
     @GetMapping("/update/{id}")
-    @ResponseBody
-    public String updateBook(@PathVariable Long id) {
+    public String updateBook(@PathVariable Long id, Model model) {
         Book book = bookService.findBook(id);
-        book.setTitle("Thinking in Javaaa");
-        bookService.updateBook(book);
-        return "Zaktualizowano ksiazke o id = " + book.getId();
+        model.addAttribute("book", book);
+        return "book";
     }
 
+    @PostMapping("/update/{id}")
+    public String updateBook(@ModelAttribute Book book) {
+        bookService.updateBook(book);
+        return "redirect:../list";
+    }
+
+
     @GetMapping("/delete/{id}")
-    @ResponseBody
     public String deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
-        return "Usunieto ksiazke o id = " + id;
+        return "redirect:../list";
     }
 
     @GetMapping("/rating/{rating}")

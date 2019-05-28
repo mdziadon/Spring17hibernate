@@ -3,6 +3,13 @@
 <html>
 <head>
     <title>Title</title>
+    <script>
+        function confirmDelete(id, title) {
+            if (confirm("Do you want to delete a book '" + title + "'?")) {
+                 window.location.href = "/books/delete/" + id;
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -12,6 +19,7 @@
             <th>Rating</th>
             <th>Description</th>
             <th>Publisher</th>
+            <th>Action</th>
         </tr>
         <c:forEach items="${books}" var="book">
             <tr>
@@ -19,6 +27,10 @@
                 <td>${book.rating}</td>
                 <td>${book.description}</td>
                 <td>${book.publisher.name}</td>
+                <td>
+                    <a href="/books/update/${book.id}">Edit</a>
+                    <a href="#" onclick="confirmDelete(${book.id}, '${book.title}')">Delete</a>
+                </td>
             </tr>
         </c:forEach>
     </table>

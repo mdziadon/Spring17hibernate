@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form:form action="/books/add" method="post" modelAttribute="book">
+<form:form method="post" modelAttribute="book">
     <label for="titleId">Title:</label>
     <form:input type="text" path="title" id="titleId"/>
 
