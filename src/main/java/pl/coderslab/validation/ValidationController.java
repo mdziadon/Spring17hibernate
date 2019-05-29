@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.coderslab.author.Author;
 import pl.coderslab.book.Book;
+import pl.coderslab.publisher.Publisher;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -51,6 +52,25 @@ public class ValidationController {
         Set<ConstraintViolation<Author>> errors = validator.validate(author);
         if (!errors.isEmpty()) {
             for (ConstraintViolation<Author> error : errors) {
+                String path = error.getPropertyPath().toString();
+                String message = error.getMessage();
+                list.add(new ErrorInfo(path, message));
+            }
+        }
+        model.addAttribute("errors", list);
+        return "errors";
+    }
+
+    @GetMapping("/publisher/validate")
+    public String validatePublisher(Model model) {
+        Publisher publisher = new Publisher();
+        publisher.setNip("3922204273");
+        publisher.setRegon("938359290");
+
+        List<ErrorInfo> list = new ArrayList<>();
+        Set<ConstraintViolation<Publisher>> errors = validator.validate(publisher);
+        if (!errors.isEmpty()) {
+            for (ConstraintViolation<Publisher> error : errors) {
                 String path = error.getPropertyPath().toString();
                 String message = error.getMessage();
                 list.add(new ErrorInfo(path, message));
