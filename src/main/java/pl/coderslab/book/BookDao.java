@@ -32,13 +32,18 @@ public class BookDao {
         }
     }
 
-    public List<Book> findAll() {
-        Query query = entityManager.createQuery("select b from Book b");
+    public List<Book> findBooks() {
+        Query query = entityManager.createQuery("select b from Book b where b.proposition = false");
         return query.getResultList();
     }
 
-    public List<Book> findAllByRating(int rating) {
-        Query query = entityManager.createQuery("select b from Book b join fetch b.authors where b.rating >= :rating");
+    public List<Book> findPropositions() {
+        Query query = entityManager.createQuery("select b from Book b where b.proposition = true");
+        return query.getResultList();
+    }
+
+    public List<Book> findBooksByRating(int rating) {
+        Query query = entityManager.createQuery("select b from Book b join fetch b.authors where b.rating >= :rating and b.proposition = false");
         query.setParameter("rating", rating);
         return query.getResultList();
     }

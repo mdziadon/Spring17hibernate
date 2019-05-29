@@ -38,11 +38,15 @@ public class BookService {
         bookDao.deleteBook(id);
     }
 
-    public List<Book> findAll() {
-        return bookDao.findAll();
+    public List<Book> findBooks() {
+        return bookDao.findBooks();
     }
 
-    public List<Book> findAllByRating(int rating) {
-        return bookDao.findAllByRating(rating);
+    public List<Book> findPropositions() {
+        return bookDao.findPropositions();
+    }
+
+    public List<Book> findBooksByRating(int rating) {
+        return bookDao.findBooksByRating(rating);
     }
 }

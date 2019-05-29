@@ -14,8 +14,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/books")
-public class BookController {
+@RequestMapping("/propositions")
+public class PropositionController {
 
     private BookService bookService;
 
@@ -24,7 +24,7 @@ public class BookController {
     private AuthorService authorService;
 
     @Autowired
-    public BookController(BookService bookService, PublisherService publisherService, AuthorService authorService) {
+    public PropositionController(BookService bookService, PublisherService publisherService, AuthorService authorService) {
         this.bookService = bookService;
         this.publisherService = publisherService;
         this.authorService = authorService;
@@ -46,10 +46,10 @@ public class BookController {
     }
 
     @GetMapping("/list")
-    public String bookList(Model model) {
-        List<Book> books = bookService.findBooks();
-        model.addAttribute("books", books);
-        return "bookList";
+    public String propositionList(Model model) {
+        List<Book> propositions = bookService.findPropositions();
+        model.addAttribute("propositions", propositions);
+        return "propositionList";
     }
 
     @GetMapping("/update/{id}")
@@ -75,20 +75,6 @@ public class BookController {
         return "redirect:../list";
     }
 
-    @GetMapping("/rating/{rating}")
-    @ResponseBody
-    public String findAllByRating(@PathVariable int rating) {
-        List<Book> books = bookService.findBooksByRating(rating);
-        return books.toString();
-    }
-
-    @GetMapping("/{id}")
-    @ResponseBody
-    public String findById(@PathVariable Long id) {
-        Book book = bookService.findBookWithAuthors(id);
-        return book.toString();
-    }
-
     @ModelAttribute("publishers")
     public List<Publisher> getPublishers() {
         return publisherService.findAll();
@@ -98,4 +84,5 @@ public class BookController {
     public List<Author> getAuthors() {
         return authorService.findAll();
     }
+
 }

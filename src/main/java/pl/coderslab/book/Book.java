@@ -29,6 +29,8 @@ public class Book {
     @Min(2)
     private int pages;
 
+    private boolean proposition;
+
     @NotNull
     @ManyToOne
     private Publisher publisher;
@@ -94,6 +96,14 @@ public class Book {
 
     public void setPages(int pages) {
         this.pages = pages;
+    }
+
+    public boolean isProposition() {
+        return proposition;
+    }
+
+    public void setProposition(boolean proposition) {
+        this.proposition = proposition;
     }
 
     @Override
