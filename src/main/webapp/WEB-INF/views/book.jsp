@@ -6,6 +6,8 @@
 </head>
 <body>
 <form:form method="post" modelAttribute="book">
+    <form:hidden path="proposition"/>
+
     <label for="titleId">Title:</label>
     <form:input type="text" path="title" id="titleId"/>
     <form:errors path="title" element="div"/>

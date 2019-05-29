@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.author.Author;
 import pl.coderslab.author.AuthorService;
 import pl.coderslab.publisher.Publisher;
 import pl.coderslab.publisher.PublisherService;
+import pl.coderslab.validation.BookValidationGroup;
 
 import javax.validation.Valid;
+import javax.validation.groups.Default;
 import java.util.List;
 
 @Controller
@@ -37,7 +40,7 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public String addBook(@ModelAttribute @Valid Book book, BindingResult result) {
+    public String addBook(@ModelAttribute @Validated(BookValidationGroup.class) Book book, BindingResult result) {
         if (result.hasErrors()) {
             return "book";
         }
@@ -60,7 +63,7 @@ public class BookController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateBook(@ModelAttribute @Valid Book book, BindingResult result) {
+    public String updateBook(@ModelAttribute @Validated(BookValidationGroup.class) Book book, BindingResult result) {
         if (result.hasErrors()) {
             return "book";
         }
