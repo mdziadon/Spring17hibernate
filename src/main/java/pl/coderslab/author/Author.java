@@ -1,6 +1,10 @@
 package pl.coderslab.author;
 
+import org.hibernate.validator.constraints.pl.PESEL;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "authors")
@@ -9,8 +13,18 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
     private String firstName;
+
+    @NotBlank
     private String lastName;
+
+    @PESEL
+    private String pesel;
+
+    @Email
+    private String email;
 
     @Transient
     private String fullName;
@@ -41,6 +55,22 @@ public class Author {
 
     public String getFullName() {
         return firstName + " " + lastName;
+    }
+
+    public String getPesel() {
+        return pesel;
+    }
+
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
