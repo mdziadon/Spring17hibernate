@@ -9,30 +9,30 @@ import java.util.List;
 @Transactional
 public class AuthorService {
 
-    private AuthorDao authorDao;
+    private AuthorRepository authorRepository;
 
-    public AuthorService(AuthorDao authorDao) {
-        this.authorDao = authorDao;
+    public AuthorService(AuthorRepository authorRepository) {
+        this.authorRepository = authorRepository;
     }
 
     public void saveAuthor(Author author) {
-        authorDao.saveAuthor(author);
+        authorRepository.save(author);
     }
 
     public void updateAuthor(Author author) {
-        authorDao.updateAuthor(author);
+        authorRepository.save(author);
     }
 
     public Author findAuthor(Long id) {
-        return authorDao.findAuthor(id);
+        return authorRepository.findById(id).orElse(null);
     }
 
     public void deleteAuthor(Long id) {
-        authorDao.deleteBookConnection(id);
-        authorDao.deleteAuthor(id);
+        authorRepository.deleteAuthorRalation(id);
+        authorRepository.deleteById(id);
     }
 
     public List<Author> findAll() {
-        return authorDao.findAll();
+        return authorRepository.findAll();
     }
 }
