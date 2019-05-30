@@ -51,4 +51,8 @@ public class BookService {
     public List<Book> findBooksByRating(int rating) {
         return bookRepository.findByRatingGreaterThanEqual(rating);
     }
+
+    void resetRating(int rating) {
+        bookRepository.resetRating(rating);
+    }
 }

@@ -97,6 +97,13 @@ public class BookController {
         return book.toString();
     }
 
+    @GetMapping("/resetRating/{rating}")
+    @ResponseBody
+    public String resetRating(@PathVariable int rating) {
+        bookService.resetRating(rating);
+        return "Rating reseted";
+    }
+
     @ModelAttribute("publishers")
     public List<Publisher> getPublishers() {
         return publisherService.findAll();
