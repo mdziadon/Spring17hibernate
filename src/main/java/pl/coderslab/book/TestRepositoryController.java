@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.coderslab.author.Author;
+import pl.coderslab.author.AuthorRepository;
 
 import java.util.List;
 
@@ -13,10 +15,15 @@ public class TestRepositoryController {
 
     private BookRepository bookRepository;
 
-    @Autowired
-    public TestRepositoryController(BookRepository bookRepository) {
+    private AuthorRepository authorRepository;
+
+    public TestRepositoryController(BookRepository bookRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
     }
+
+    @Autowired
+
 
     @GetMapping("/findAll")
     @ResponseBody
@@ -65,5 +72,12 @@ public class TestRepositoryController {
     public String findFirstByCategoryIdOrderByTitle(@PathVariable Long id) {
         Book book = bookRepository.findFirstByCategoryIdOrderByTitleQuery(id);
         return book.toString();
+    }
+
+    @GetMapping("/findByEmailQuery/{emailPrefix}")
+    @ResponseBody
+    public String findByEmailQuery(@PathVariable String emailPrefix) {
+        List<Author> authors = authorRepository.findByEmailQuery(emailPrefix);
+        return authors.toString();
     }
 }
