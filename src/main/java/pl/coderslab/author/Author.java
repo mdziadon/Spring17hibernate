@@ -22,9 +22,11 @@ public class Author {
     private String lastName;
 
     @PESEL
+    @Column(unique = true)
     private String pesel;
 
     @Email
+    @Column(unique = true)
     private String email;
 
     @Age(min = 20)
