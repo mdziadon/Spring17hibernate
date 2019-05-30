@@ -63,7 +63,7 @@ public class TestRepositoryController {
     @GetMapping("/findFirstByCategoryIdOrderByTitle/{id}")
     @ResponseBody
     public String findFirstByCategoryIdOrderByTitle(@PathVariable Long id) {
-        Book book = bookRepository.findFirstByCategoryIdOrderByTitle(id);
+        Book book = bookRepository.findFirstByCategoryIdOrderByTitleQuery(id);
         return book.toString();
     }
 }

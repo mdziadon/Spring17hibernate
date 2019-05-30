@@ -23,11 +23,20 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findByPublisherId(Long id);
 
+    @Query("select b from Book b where b.publisher.id = ?1")
+    List<Book> findByPublisherIdQuery(Long id);
+
     List<Book> findByRatingGreaterThanEqual(int rating);
 
     Book findFirstByCategoryIdOrderByTitle(Long id);
 
+    @Query(value = "select * from books where category_id = ?1 order by title limit 1", nativeQuery = true)
+    Book findFirstByCategoryIdOrderByTitleQuery(Long id);
+
     List<Book> findAllByProposition(boolean proposition);
+
+    @Query("select b from Book b where b.rating between ?1 and ?2")
+    List<Book> findByRatingQuery(int from, int to);
 
     @Modifying
     @Query(value = "delete from book_authors where book_id = ?1", nativeQuery = true)
