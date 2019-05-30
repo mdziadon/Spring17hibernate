@@ -44,6 +44,11 @@
 
     <br><br>
 
+    <label for="categoryId">Category:</label>
+    <form:select path="category.id" items="${categories}" itemLabel="name" itemValue="id" id="categoryId"/>
+
+    <br><br>
+
     <input type="submit" value="Send">
 </form:form>
 </body>

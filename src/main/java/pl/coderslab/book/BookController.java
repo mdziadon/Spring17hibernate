@@ -8,6 +8,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.author.Author;
 import pl.coderslab.author.AuthorService;
+import pl.coderslab.category.Category;
+import pl.coderslab.category.CategoryService;
 import pl.coderslab.publisher.Publisher;
 import pl.coderslab.publisher.PublisherService;
 import pl.coderslab.validation.BookValidationGroup;
@@ -26,11 +28,14 @@ public class BookController {
 
     private AuthorService authorService;
 
+    private CategoryService categoryService;
+
     @Autowired
-    public BookController(BookService bookService, PublisherService publisherService, AuthorService authorService) {
+    public BookController(BookService bookService, PublisherService publisherService, AuthorService authorService, CategoryService categoryService) {
         this.bookService = bookService;
         this.publisherService = publisherService;
         this.authorService = authorService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/add")
@@ -100,5 +105,10 @@ public class BookController {
     @ModelAttribute("authors")
     public List<Author> getAuthors() {
         return authorService.findAll();
+    }
+
+    @ModelAttribute("categories")
+    public List<Category> getCategories() {
+        return categoryService.findAll();
     }
 }
