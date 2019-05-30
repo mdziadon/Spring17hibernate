@@ -38,4 +38,32 @@ public class TestRepositoryController {
         List<Book> books = bookRepository.findByCategoryId(id);
         return books.toString();
     }
+
+    @GetMapping("/findByAuthorsId/{id}")
+    @ResponseBody
+    public String findByAuthorsId(@PathVariable Long id) {
+        List<Book> books = bookRepository.findByAuthorsId(id);
+        return books.toString();
+    }
+
+    @GetMapping("/findByPublisherId/{id}")
+    @ResponseBody
+    public String findByPublisherId(@PathVariable Long id) {
+        List<Book> books = bookRepository.findByPublisherId(id);
+        return books.toString();
+    }
+
+    @GetMapping("/findByRatingGreaterThanEqual/{rating}")
+    @ResponseBody
+    public String findByRatingGreaterThanEqual(@PathVariable int rating) {
+        List<Book> books = bookRepository.findByRatingGreaterThanEqual(rating);
+        return books.toString();
+    }
+
+    @GetMapping("/findFirstByCategoryIdOrderByTitle/{id}")
+    @ResponseBody
+    public String findFirstByCategoryIdOrderByTitle(@PathVariable Long id) {
+        Book book = bookRepository.findFirstByCategoryIdOrderByTitle(id);
+        return book.toString();
+    }
 }

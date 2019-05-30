@@ -1,6 +1,7 @@
 package pl.coderslab.book;
 
 import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,43 +11,44 @@ import java.util.List;
 @Transactional
 public class BookService {
 
-    private BookDao bookDao;
+    private BookRepository bookRepository;
 
-    public BookService(BookDao bookDao) {
-        this.bookDao = bookDao;
+    @Autowired
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
     public void saveBook(Book book) {
-        bookDao.saveBook(book);
+        bookRepository.save(book);
     }
 
     public void updateBook(Book book) {
-        bookDao.updateBook(book);
+        bookRepository.save(book);
     }
 
     public Book findBook(Long id) {
-        return bookDao.findBook(id);
+        return bookRepository.findById(id).orElse(null);
     }
 
     public Book findBookWithAuthors(Long id) {
-        Book book = bookDao.findBook(id);
+        Book book = findBook(id);
         Hibernate.initialize(book.getAuthors());
         return book;
     }
 
     public void deleteBook(Long id) {
-        bookDao.deleteBook(id);
+        bookRepository.deleteById(id);
     }
 
     public List<Book> findBooks() {
-        return bookDao.findBooks();
+        return bookRepository.findAllByProposition(false);
     }
 
     public List<Book> findPropositions() {
-        return bookDao.findPropositions();
+        return bookRepository.findAllByProposition(true);
     }
 
     public List<Book> findBooksByRating(int rating) {
-        return bookDao.findBooksByRating(rating);
+        return bookRepository.findByRatingGreaterThanEqual(rating);
     }
 }
