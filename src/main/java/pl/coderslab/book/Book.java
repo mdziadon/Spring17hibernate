@@ -2,6 +2,7 @@ package pl.coderslab.book;
 
 import org.hibernate.validator.constraints.Range;
 import pl.coderslab.author.Author;
+import pl.coderslab.category.Category;
 import pl.coderslab.publisher.Publisher;
 import pl.coderslab.validation.BookValidationGroup;
 import pl.coderslab.validation.PropositionValidationGroup;
@@ -45,6 +46,9 @@ public class Book {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> authors;
+
+    @ManyToOne
+    private Category category;
 
     public Long getId() {
         return id;
@@ -118,7 +122,6 @@ public class Book {
                 ", rating=" + rating +
                 ", description='" + description + '\'' +
                 ", publisher=" + publisher +
-                ", authors=" + authors +
                 '}';
     }
 }
